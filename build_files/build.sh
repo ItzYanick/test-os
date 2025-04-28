@@ -15,6 +15,7 @@ set -ouex pipefail
 # dnf5 install -y /ctx/fedora-42-displaylink-1.14.9-2.github_evdi.x86_64.rpm
 # dnf5 install -y /ctx/akmod-evdi-1.14.9-1.fc42.x86_64.rpm
 # dnf5 install -y /ctx/displaylink-6.1.0-2.fc42.x86_64.rpm
+ls -R /tmp/akmods-extra-rpms
 dnf5 install -y /tmp/akmods-extra-rpms/kmods/*evdi*.rpm
 
 # Use a COPR Example:
