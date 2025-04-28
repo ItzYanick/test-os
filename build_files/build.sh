@@ -10,7 +10,9 @@ set -ouex pipefail
 # https://mirrors.rpmfusion.org/mirrorlist?path=free/fedora/updates/39/x86_64/repoview/index.html&protocol=https&redirect=1
 
 # this installs a package from fedora repos
-dnf5 install -y tmux 
+# dnf5 install -y tmux 
+
+dnf5 install -y /ctx/fedora-42-displaylink-1.14.9-2.github_evdi.x86_64.rpm
 
 # Use a COPR Example:
 #
