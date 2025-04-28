@@ -2,7 +2,7 @@
 FROM scratch AS ctx
 COPY build_files /
 
-FROM ghcr.io/ublue-os/akmods-extra:bazzite-f42 AS akmods-extra
+FROM ghcr.io/ublue-os/akmods-extra:bazzite-42 AS akmods-extra
 
 # Base Image
 FROM ghcr.io/ublue-os/bazzite-gnome:stable
