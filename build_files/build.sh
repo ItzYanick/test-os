@@ -18,7 +18,7 @@ set -ouex pipefail
 # ls -R /tmp/akmods-extra-rpms
 # dnf5 install -y /tmp/akmods-extra-rpms/kmods/*evdi*.rpm
 dnf5 install -y dkms
-/ctx/displaylink-driver-6.1.1-17.run
+SYSTEMINITDAEMON="systemd" /ctx/displaylink-driver-6.1.1-17.run
 
 # Use a COPR Example:
 #
