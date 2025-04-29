@@ -12,23 +12,29 @@ set -ouex pipefail
 # this installs a package from fedora repos
 # dnf5 install -y tmux 
 
+ARCH="$(rpm -E '%_arch')"
+KERNEL="$(rpm -q "${KERNEL_NAME}" --queryformat '%{VERSION}-%{RELEASE}.%{ARCH}')"
+RELEASE="$(rpm -E '%fedora')"
+
 # dnf5 install -y /ctx/fedora-42-displaylink-1.14.9-2.github_evdi.x86_64.rpm
-# dnf5 install -y /ctx/akmod-evdi-1.14.9-1.fc42.x86_64.rpm
-# dnf5 install -y /ctx/displaylink-6.1.0-2.fc42.x86_64.rpm
+dnf5 install -y /ctx/kmod-evdi-1.14.9-1.fc42.x86_64.rpm
+dnf5 install -y /ctx/akmod-evdi-1.14.9-1.fc42.x86_64.rpm
+dnf5 install -y /ctx/displaylink-6.1.0-2.fc42.x86_64.rpm
+akmods --force --kernels "${KERNEL}" --kmod evdi
 # ls -R /tmp/akmods-extra-rpms
 # dnf5 install -y /tmp/akmods-extra-rpms/kmods/*evdi*.rpm
-dnf5 -y remove --no-autoremove kernel kernel-core kernel-modules kernel-modules-core kernel-modules-extra
+# dnf5 -y remove --no-autoremove kernel kernel-core kernel-modules kernel-modules-core kernel-modules-extra
 
-dnf5 -y install \
-    /tmp/kernel-rpms/kernel-[0-9]*.rpm \
-    /tmp/kernel-rpms/kernel-core-*.rpm \
-    /tmp/kernel-rpms/kernel-modules-*.rpm \
-    /tmp/kernel-rpms/kernel-devel-*.rpm
+# dnf5 -y install \
+#     /tmp/kernel-rpms/kernel-[0-9]*.rpm \
+#     /tmp/kernel-rpms/kernel-core-*.rpm \
+#     /tmp/kernel-rpms/kernel-modules-*.rpm \
+#     /tmp/kernel-rpms/kernel-devel-*.rpm
 
-dnf5 versionlock add kernel kernel-devel kernel-devel-matched kernel-core kernel-modules kernel-modules-core kernel-modules-extra kernel-uki-virt
+# dnf5 versionlock add kernel kernel-devel kernel-devel-matched kernel-core kernel-modules kernel-modules-core kernel-modules-extra kernel-uki-virt
 
-dnf5 install -y dkms
-SYSTEMINITDAEMON="systemd" /ctx/displaylink-driver-6.1.1-17.run
+# dnf5 install -y dkms
+# SYSTEMINITDAEMON="systemd" /ctx/displaylink-driver-6.1.1-17.run
 
 # Use a COPR Example:
 #
