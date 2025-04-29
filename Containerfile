@@ -2,7 +2,8 @@
 FROM scratch AS ctx
 COPY build_files /
 
-FROM ghcr.io/ublue-os/akmods-extra:bazzite-42 AS akmods-extra
+FROM ghcr.io/ublue-os/akmods:bazzite-42 AS akmods
+# FROM ghcr.io/ublue-os/akmods-extra:bazzite-42 AS akmods-extra
 
 # Base Image
 FROM ghcr.io/ublue-os/bazzite-gnome:stable
@@ -21,7 +22,8 @@ FROM ghcr.io/ublue-os/bazzite-gnome:stable
 ## the following RUN directive does all the things required to run "build.sh" as recommended.
 
 RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
-    --mount=type=bind,from=akmods-extra,src=/rpms,dst=/tmp/akmods-extra-rpms \
+    --mount=type=bind,from=akmods,src=/kernel-rpms,dst=/tmp/kernel-rpms \
+#    --mount=type=bind,from=akmods-extra,src=/rpms,dst=/tmp/akmods-extra-rpms \
     --mount=type=cache,dst=/var/cache \
     --mount=type=cache,dst=/var/log \
     --mount=type=tmpfs,dst=/tmp \

@@ -17,6 +17,16 @@ set -ouex pipefail
 # dnf5 install -y /ctx/displaylink-6.1.0-2.fc42.x86_64.rpm
 # ls -R /tmp/akmods-extra-rpms
 # dnf5 install -y /tmp/akmods-extra-rpms/kmods/*evdi*.rpm
+dnf5 -y remove --no-autoremove kernel kernel-core kernel-modules kernel-modules-core kernel-modules-extra
+
+dnf5 -y install \
+    /tmp/kernel-rpms/kernel-[0-9]*.rpm \
+    /tmp/kernel-rpms/kernel-core-*.rpm \
+    /tmp/kernel-rpms/kernel-modules-*.rpm \
+    /tmp/kernel-rpms/kernel-devel-*.rpm
+
+dnf5 versionlock add kernel kernel-devel kernel-devel-matched kernel-core kernel-modules kernel-modules-core kernel-modules-extra kernel-uki-virt
+
 dnf5 install -y dkms
 SYSTEMINITDAEMON="systemd" /ctx/displaylink-driver-6.1.1-17.run
 
